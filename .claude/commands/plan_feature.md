@@ -1,0 +1,18 @@
+<instructions_for_plan_feature>
+    Think deeply: Given `feature_description` from `action_args`, perform a deep strategic analysis. Your output will be a `PreliminaryFeatureAnalysis` object containing: (a) ArchitecturalAlignmentImpacts (string), (b) KeyDependenciesIntegrationPoints (list of strings), (c) SignificantEdgeCasesRisks (list of strings), (d) CoreVsOptionalCapabilities (string detailing separation), (e) ValueComplexityAssessment (string), (f) RecommendedFeaturePlanStructure (list of section titles like 'Goal', 'User Stories', 'TechnicalApproach', 'Risks', 'OpenQuestions', 'TaskBreakdown'), (g) InitialHighLevelThoughts (dictionary mapping section titles from (f) to initial content strings). This `PreliminaryFeatureAnalysis` will directly inform subsequent planning steps.
+    0.  <role_adoption>Adopt role: "You are an expert Software Architect."</role_adoption>
+    1.  <planning_step>Parse `action_args` for `feature_description`. If empty, ask for it and stop if not provided. Reference `PreliminaryFeatureAnalysis` (especially points f and g).
+        Propose overall plan: "Based on my deep analysis of '{feature_description}', I will guide you to create a feature plan document. This will involve: 1. Generating a `feature_slug`. 2. Proposing a plan file `./.claude/orchestration/feature_plan_{feature_slug}.md` structured with sections: {PreliminaryFeatureAnalysis.RecommendedFeaturePlanStructure (comma-separated)}. 3. Populating this file with initial thoughts derived from my analysis. After creation, I can help you further refine these sections. Shall I proceed? (y/n)". If 'n', stop.</planning_step>
+    2.  <generate_slug>On 'y' for plan: Generate `feature_slug` from `feature_description` (lowercase, spaces to `_`, simplified, concise).</generate_slug>
+    3.  <create_plan_file_proposal>
+        Let `FeaturePlanFilePath` be `./.claude/orchestration/feature_plan_{feature_slug}.md`.
+        Construct the initial content for `FeaturePlanFilePath` using `PreliminaryFeatureAnalysis.RecommendedFeaturePlanStructure` for section headers and `PreliminaryFeatureAnalysis.InitialHighLevelThoughts` for the initial content of each section. Ensure a placeholder like '[Details to be added]' if `InitialHighLevelThoughts` is brief for a section. The file should start with `# Feature Plan: {feature_description}` and include an Action Items/Checklist section with `Initial draft created on {Current Date YYYY-MM-DD}`.
+        Ask: "Shall I create the feature plan file `{FeaturePlanFilePath}` with this structure and initial content derived from my analysis, using my file creation tool? (y/n)".
+        </create_plan_file_proposal>
+    4.  <execution_create>Upon 'y', create. Report success/failure. If failure, stop.</execution_create>
+    5.  <populate_plan_initial>Suggest: "The plan file is created. Would you like me to help populate any specific section now, for example, the 'Goal' or brainstorm some 'User Stories' based on '{feature_description}'? Or would you prefer to populate it yourself? (help_populate/user_populates)".
+        If 'help_populate', interactively fill sections. For each section, propose additions/changes to `FeaturePlanFilePath` and confirm before editing.
+        </populate_plan_initial>
+    6.  <o>Report: "Feature plan draft initiated at `{FeaturePlanFilePath}`. You can refine this plan and use it to guide task creation or orchestration."</o>
+    7.  <suggestion>Suggest: "Consider creating tasks using the `create_task.md` command or start orchestration with the `orchestrate_goal.md` command (e.g., by invoking `/orchestrate_goal {FeaturePlanFilePath}` or similar, if appropriate for your workflow) for complex features."</suggestion>
+</instructions_for_plan_feature>
