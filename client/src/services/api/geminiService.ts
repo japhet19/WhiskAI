@@ -32,13 +32,13 @@ const MODEL = 'models/gemini-2.5-flash-preview-05-20';
  */
 export const initChat = async (): Promise<void> => {
   console.log('Initializing Gemini chat service...');
-  
+
   try {
     console.log(`Initializing with model: ${MODEL}`);
-    
+
     // Create a generative model instance
     model = genAI.getGenerativeModel({ model: MODEL });
-    
+
     // Create generation config
     const generationConfig = {
       temperature: 0.7,
@@ -46,26 +46,34 @@ export const initChat = async (): Promise<void> => {
       topK: 40,
       maxOutputTokens: 2048,
     };
-    
+
     // Set up the initial message as 'user' role with the system instructions
     // Gemini requires the first message to have role 'user'
     const initialMessage = {
       role: 'user',
-      parts: [{ text: "Please behave as follows: You are Curie, the AI food companion for WhiskAI. Your mission is to inspire culinary creativity and simplify food management. Engage users with interesting recipe suggestions, explore diverse cuisines, and offer tips for elevating their cooking skills. While managing inventory and meal plans, maintain an enthusiastic and curious tone. Encourage experimentation and learning in the kitchen. You are intelligent, adaptable, and passionate about all things food. Help users discover new favorites and enjoy the process of cooking." }]
+      parts: [
+        {
+          text: 'Please behave as follows: You are Curie, the AI food companion for WhiskAI. Your mission is to inspire culinary creativity and simplify food management. Engage users with interesting recipe suggestions, explore diverse cuisines, and offer tips for elevating their cooking skills. While managing inventory and meal plans, maintain an enthusiastic and curious tone. Encourage experimentation and learning in the kitchen. You are intelligent, adaptable, and passionate about all things food. Help users discover new favorites and enjoy the process of cooking.',
+        },
+      ],
     };
-    
+
     // Model response to the initial message
     const modelResponse = {
       role: 'model',
-      parts: [{ text: "I understand! I'll be Curie, your AI food companion. I'm here to help with recipes, cooking tips, and food inspiration. How can I assist you with your culinary needs today?" }]
+      parts: [
+        {
+          text: "I understand! I'll be Curie, your AI food companion. I'm here to help with recipes, cooking tips, and food inspiration. How can I assist you with your culinary needs today?",
+        },
+      ],
     };
-    
+
     // Create chat session with the initial exchange in history
     chatSession = model.startChat({
       generationConfig,
       history: [initialMessage, modelResponse],
     });
-    
+
     console.log(`Successfully initialized chat with model: ${MODEL}`);
   } catch (error) {
     console.error(`Failed to initialize Gemini model:`, error);
@@ -82,21 +90,24 @@ export const sendMessage = async (message: string): Promise<string> => {
   if (!chatSession) {
     await initChat();
   }
-  
+
   if (!chatSession) {
     throw new Error('Chat session could not be initialized');
   }
-  
+
   try {
-    console.log('Sending message to Gemini:', message.substring(0, 50) + (message.length > 50 ? '...' : ''));
-    
+    console.log(
+      'Sending message to Gemini:',
+      message.substring(0, 50) + (message.length > 50 ? '...' : '')
+    );
+
     // Send the message to the chat
     const result = await chatSession.sendMessage(message);
     const responseText = result.response.text();
     return responseText;
   } catch (error) {
     console.error('Error sending message to Gemini:', error);
-    
+
     // Try to reinitialize the session
     try {
       console.log('Attempting to reinitialize chat session...');
@@ -106,7 +117,7 @@ export const sendMessage = async (message: string): Promise<string> => {
     } catch (reinitError) {
       console.error('Failed to reinitialize chat session:', reinitError);
     }
-    
+
     throw error;
   }
 };
@@ -122,18 +133,20 @@ export const sendMessageStream = async (
   if (!chatSession) {
     await initChat();
   }
-  
+
   if (!chatSession) {
     throw new Error('Chat session could not be initialized');
   }
-  
+
   try {
-    console.log('Sending streaming message to Gemini:', 
-      message.substring(0, 50) + (message.length > 50 ? '...' : ''));
-    
+    console.log(
+      'Sending streaming message to Gemini:',
+      message.substring(0, 50) + (message.length > 50 ? '...' : '')
+    );
+
     // Send the message to the chat with streaming response
     const result = await chatSession.sendMessageStream(message);
-    
+
     // Process each chunk as it arrives
     for await (const chunk of result.stream) {
       const chunkText = chunk.text();
@@ -141,12 +154,12 @@ export const sendMessageStream = async (
         onChunk(chunkText);
       }
     }
-    
+
     console.log('Message stream completed successfully');
     onComplete();
   } catch (error) {
     console.error('Error streaming message with Gemini:', error);
-    
+
     // Try to reinitialize the session
     try {
       console.log('Attempting to reinitialize chat session...');
@@ -156,7 +169,7 @@ export const sendMessageStream = async (
     } catch (reinitError) {
       console.error('Failed to reinitialize chat session:', reinitError);
     }
-    
+
     throw error;
   }
 };
