@@ -40,7 +40,7 @@
 
 /* Grid pattern for background */
 .bg-grid-pattern {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 40px 40px;
@@ -71,16 +71,29 @@
   }
 
   /* Improved heading hierarchy */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -0.025em;
   }
 
-  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-  h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
-  h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-  h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+  h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  }
 
   /* Better paragraph spacing */
   p {
@@ -105,8 +118,17 @@
   }
 
   /* Better form elements */
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Improved placeholder text contrast */
+  input::placeholder,
+  textarea::placeholder {
+    color: theme('colors.gray.600');
+    opacity: 1; /* Override browser default opacity */
   }
 
   /* Improved button base styles */
@@ -143,12 +165,12 @@
     --text-primary: theme('colors.gray.100');
     --text-secondary: theme('colors.gray.300');
   }
-  
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
   }
-  
+
   code {
     background-color: theme('colors.gray.800');
     color: theme('colors.gray.200');
@@ -165,7 +187,7 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .animate-blob {
     animation: none;
   }
@@ -177,12 +199,12 @@
     background: white;
     color: black;
   }
-  
+
   a {
-    color: #0000EE;
+    color: #0000ee;
     text-decoration: underline;
   }
-  
+
   button {
     border: 2px solid black;
   }
@@ -194,39 +216,39 @@
   .mobile-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
-  
+
   .mobile-margin {
     @apply mx-4 sm:mx-6 lg:mx-8;
   }
-  
+
   /* Improved mobile typography */
   .mobile-heading {
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
   }
-  
+
   .mobile-subheading {
     @apply text-lg sm:text-xl md:text-2xl;
   }
-  
+
   .mobile-body {
     @apply text-sm sm:text-base md:text-lg;
   }
-  
+
   /* Focus utilities */
   .focus-visible {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2;
   }
-  
+
   /* Glass morphism effect */
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
-  
+
   /* Better shadows */
   .shadow-soft {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   }
-  
+
   .shadow-strong {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   }

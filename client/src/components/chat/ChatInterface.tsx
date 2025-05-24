@@ -168,11 +168,7 @@ const ChatInterface: React.FC = () => {
                 }`}
               >
                 {message.sender === 'ai' && (
-                  <CurieAvatar 
-                    size="sm" 
-                    animated={index === 0}
-                    showPulse={message.isStreaming}
-                  />
+                  <CurieAvatar size="sm" animated={index === 0} showPulse={message.isStreaming} />
                 )}
                 <div
                   className={`max-w-[70%] px-4 py-3 rounded-2xl ${
@@ -181,56 +177,58 @@ const ChatInterface: React.FC = () => {
                       : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
                   }`}
                 >
-                <div className="message-content">
-                  {message.sender === 'user' ? (
-                    <p className="whitespace-pre-wrap break-words">{message.text}</p>
-                  ) : (
-                    <div className="prose prose-sm max-w-none">
-                      <ReactMarkdown
-                        components={{
-                          p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
-                          strong: ({ children }) => (
-                            <strong className="font-bold text-primary-700">{children}</strong>
-                          ),
-                          em: ({ children }) => (
-                            <em className="italic text-gray-700">{children}</em>
-                          ),
-                          code: ({ children }) => (
-                            <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">
-                              {children}
-                            </code>
-                          ),
-                          pre: ({ children }) => (
-                            <pre className="bg-gray-100 p-3 rounded-lg overflow-x-auto my-2">
-                              {children}
-                            </pre>
-                          ),
-                          ul: ({ children }) => (
-                            <ul className="list-disc list-inside my-2 space-y-1">{children}</ul>
-                          ),
-                          ol: ({ children }) => (
-                            <ol className="list-decimal list-inside my-2 space-y-1">{children}</ol>
-                          ),
-                          li: ({ children }) => <li className="ml-2">{children}</li>,
-                          a: ({ children, href }) => (
-                            <a
-                              href={href}
-                              className="text-primary-600 hover:text-primary-700 underline"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {children}
-                            </a>
-                          ),
-                        }}
-                      >
-                        {message.text}
-                      </ReactMarkdown>
-                      {message.isStreaming && renderTypingIndicator()}
-                    </div>
-                  )}
+                  <div className="message-content">
+                    {message.sender === 'user' ? (
+                      <p className="whitespace-pre-wrap break-words">{message.text}</p>
+                    ) : (
+                      <div className="prose prose-sm max-w-none">
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                            strong: ({ children }) => (
+                              <strong className="font-bold text-primary-700">{children}</strong>
+                            ),
+                            em: ({ children }) => (
+                              <em className="italic text-gray-700">{children}</em>
+                            ),
+                            code: ({ children }) => (
+                              <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">
+                                {children}
+                              </code>
+                            ),
+                            pre: ({ children }) => (
+                              <pre className="bg-gray-100 p-3 rounded-lg overflow-x-auto my-2">
+                                {children}
+                              </pre>
+                            ),
+                            ul: ({ children }) => (
+                              <ul className="list-disc list-inside my-2 space-y-1">{children}</ul>
+                            ),
+                            ol: ({ children }) => (
+                              <ol className="list-decimal list-inside my-2 space-y-1">
+                                {children}
+                              </ol>
+                            ),
+                            li: ({ children }) => <li className="ml-2">{children}</li>,
+                            a: ({ children, href }) => (
+                              <a
+                                href={href}
+                                className="text-primary-600 hover:text-primary-700 underline"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {children}
+                              </a>
+                            ),
+                          }}
+                        >
+                          {message.text}
+                        </ReactMarkdown>
+                        {message.isStreaming && renderTypingIndicator()}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
               </div>
             </FadeSlideUp>
           ))}
@@ -249,7 +247,7 @@ const ChatInterface: React.FC = () => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask Curie about food, recipes, cooking tips..."
           disabled={isLoading}
-          className="flex-1 px-4 py-3 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-all"
+          className="flex-1 px-4 py-3 rounded-full border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed transition-all"
         />
         <button
           type="submit"
