@@ -1,9 +1,9 @@
-# Claude Code Project: [Your Project Name Here - Replace This]
+# Claude Code Project: WhiskAI - LLM-Powered Meal Planning Application
 
 This file guides Claude's interactions with this project.
 
 ## 1. Core Objective:
-[To be filled by user: What is the main goal of this project?]
+WhiskAI is an LLM-powered web application that simplifies personalized meal planning through intelligent recipe recommendations, adaptive meal cards, and budget-conscious shopping integration. The MVP focuses on delivering a conversational chat interface for meal planning with dynamic recipe suggestions based on user preferences, dietary requirements, and budget constraints.
 
 ## 2. Key Project Files & Directories for Claude:
 -   **This File (`CLAUDE.MD`):** Primary instructions. Always refer back here.
@@ -54,7 +54,32 @@ When executing any of the project commands listed in Section 3, or performing re
 5.  **Planning for Complexity**: For multi-step or complex operations (like `update_task` involving status changes, `plan_feature`, `debug_issue`, `orchestrate_goal`), first propose a high-level plan or a sequence of checks/actions. Get user confirmation on this plan *before* starting detailed execution.
 6.  **Refer to Context**: Regularly consult `./.claude/memory/active_context.md` and the project's main `CLAUDE.MD` for current focus, priorities, and interaction guidelines.
 
-## 6. Initial Setup:
+## 6. Technical Stack & Architecture:
+- **Frontend**: React with TypeScript, Tailwind CSS for styling, Framer Motion for animations
+- **State Management**: React Context API with localStorage persistence
+- **LLM Integration**: Gemini API for recipe generation and meal planning
+- **Design System**: Custom design tokens with teal/melon color scheme
+- **Routing**: React Router for navigation
+- **Testing**: Jest and React Testing Library
+
+## 7. Key Features (MVP):
+- Interactive chat interface for meal planning requests
+- Adaptive meal cards with recipe details and ingredient pricing
+- Budget management with clear total display and adjustment controls
+- User preferences for dietary requirements, cooking time, and servings
+- Recipe locking/favoriting functionality
+- Grocery price estimation (initially via web scraping, later via Walmart API)
+
+## 8. Project Structure:
+- `/client/` - React frontend application
+- `/recipe_clients/` - Python backend adapters for recipe APIs
+- `/docs/` - Product documentation (Vision, PRD, MVP phases)
+- `/tests/` - Test suite
+
+## 9. Current Development Phase:
+MVP Phase 1: Core Infrastructure setup including design system, state management, and routing
+
+## 10. Initial Setup:
 The project structure and PM system should be initialized via `/user:setup-project-management`. If you detect inconsistencies (e.g., missing PM files/directories), please notify me.
 
 ---
